@@ -1,0 +1,26 @@
+{
+  "name": "talk-svg-twig",
+  "version": "1.0.0",
+  "description": "Comment génerer des graphiques dans Symfony avec Twig et SVG.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tom32i/talk-svg-twig.git"
+  },
+  "keywords": [
+    "svg",
+    "twig",
+    "symfony",
+    "graph"
+  ],
+  "author": "Thomas Jarrand <thomas.jarrand@gmail.com> (https://thomas.jarrand.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tom32i/talk-svg-twig/issues"
+  },
+  "homepage": "https://github.com/Tom32i/talk-svg-twig#readme",
+  "dependencies": {
+    "reveal.js": "^3.8.0"
+  }
+}

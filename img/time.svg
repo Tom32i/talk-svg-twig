@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg class="time" width="1e3" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">svg text {
+  font-family: monospace;
+}
+svg.time .bar {
+  fill: #B5838D;
+}
+svg.time .axe {
+  stroke: #6D6875;
+  stroke-width: 0.6;
+}
+svg.time .legend {
+  font-size: 16px;
+  fill: #6D6875;
+}
+svg.time .percent {
+  fill: white;
+}
+svg.time .label {
+  fill: white;
+  line-height: 14px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+svg.time .label-box {
+  fill: #6D6875;
+}</style>
+<line class="axe"/>
+<rect class="bar" x="18.75" y="-114.41" width="45.833" height="114.41"/>
+<path class="label-box" d="m41.667-119.41l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="41.666666666667" y="-134.41441441441" text-anchor="middle">127 kg</text>
+<text class="legend" x="41.666666666667" y="20" text-anchor="middle">JANV.</text>
+<rect class="bar" x="102.08" y="-102.7" width="45.833" height="102.7"/>
+<path class="label-box" d="m125-107.7l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="125" y="-122.7027027027" text-anchor="middle">114 kg</text>
+<text class="legend" x="125" y="20" text-anchor="middle">FÉVR.</text>
+<rect class="bar" x="185.42" y="-88.288" width="45.833" height="88.288"/>
+<path class="label-box" d="m208.33-93.288l-5-5h-24.25v-29h58.5v29h-24.25z"/>
+<text class="label" x="208.33333333333" y="-108.28828828829" text-anchor="middle">98 kg</text>
+<text class="legend" x="208.33333333333" y="20" text-anchor="middle">MARS</text>
+<rect class="bar" x="268.75" y="-100.9" width="45.833" height="100.9"/>
+<path class="label-box" d="m291.67-105.9l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="291.66666666667" y="-120.9009009009" text-anchor="middle">112 kg</text>
+<text class="legend" x="291.66666666667" y="20" text-anchor="middle">AVR.</text>
+<rect class="bar" x="352.08" y="-121.62" width="45.833" height="121.62"/>
+<path class="label-box" d="m375-126.62l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="375" y="-141.62162162162" text-anchor="middle">135 kg</text>
+<text class="legend" x="375" y="20" text-anchor="middle">MAI</text>
+<rect class="bar" x="435.42" y="-140.54" width="45.833" height="140.54"/>
+<path class="label-box" d="m458.33-145.54l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="458.33333333333" y="-160.54054054054" text-anchor="middle">156 kg</text>
+<text class="legend" x="458.33333333333" y="20" text-anchor="middle">JUIN</text>
+<rect class="bar" x="518.75" y="-200" width="45.833" height="200"/>
+<path class="label-box" d="m541.67-205l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="541.66666666667" y="-220" text-anchor="middle">222 kg</text>
+<text class="legend" x="541.66666666667" y="20" text-anchor="middle">JUIL.</text>
+<rect class="bar" x="602.08" y="-178.38" width="45.833" height="178.38"/>
+<path class="label-box" d="m625-183.38l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="625" y="-198.37837837838" text-anchor="middle">198 kg</text>
+<text class="legend" x="625" y="20" text-anchor="middle">AOÛT</text>
+<rect class="bar" x="685.42" y="-104.5" width="45.833" height="104.5"/>
+<path class="label-box" d="m708.33-109.5l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="708.33333333333" y="-124.5045045045" text-anchor="middle">116 kg</text>
+<text class="legend" x="708.33333333333" y="20" text-anchor="middle">SEPT.</text>
+<rect class="bar" x="768.75" y="-86.486" width="45.833" height="86.486"/>
+<path class="label-box" d="m791.67-91.486l-5-5h-24.25v-29h58.5v29h-24.25z"/>
+<text class="label" x="791.66666666667" y="-106.48648648649" text-anchor="middle">96 kg</text>
+<text class="legend" x="791.66666666667" y="20" text-anchor="middle">OCT.</text>
+<rect class="bar" x="852.08" y="-82.883" width="45.833" height="82.883"/>
+<path class="label-box" d="m875-87.883l-5-5h-24.25v-29h58.5v29h-24.25z"/>
+<text class="label" x="875" y="-102.88288288288" text-anchor="middle">92 kg</text>
+<text class="legend" x="875" y="20" text-anchor="middle">NOV.</text>
+<rect class="bar" x="935.42" y="-97.297" width="45.833" height="97.297"/>
+<path class="label-box" d="m958.33-102.3l-5-5h-28.5v-29h67v29h-28.5z"/>
+<text class="label" x="958.33333333333" y="-117.2972972973" text-anchor="middle">108 kg</text>
+<text class="legend" x="958.33333333333" y="20" text-anchor="middle">DÉC.</text>
+</svg>

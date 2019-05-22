@@ -1,0 +1,33 @@
+<svg class="mx-auto d-block" xmlns="http://www.w3.org/2000/svg" width="235" height="198">
+  <style type="text/css">
+    svg text {
+      fill: #767676;
+      font-size: 10px;
+      font-family: sans-serif;
+    }
+    .activity-overview-axis,
+    .activity-overview-point {
+        stroke: #6cb267;
+    }
+    .activity-overview-percentage {
+        fill: #959da5;
+    }
+  </style>
+  <g transform="translate(-17.515625, -42.78125)">
+    <path class="js-highlight-blob" stroke-linejoin="round" fill="#7bc96f" stroke="#7bc96f" stroke-width="7" d="M142.5,125.72549019607843 L163.16973039215685,142.5 L142.5,156.67769607843138 L80.28125,142.5 z"></path>
+    <line stroke-width="2" class="js-highlight-x-axis activity-overview-axis " x1="76.28125" y1="142.5" x2="208.71875" y2="142.5"></line>
+    <line stroke-width="2" class="js-highlight-y-axis activity-overview-axis " x1="142.5" y1="76.28125" x2="142.5" y2="208.71875"></line>
+    <ellipse class="activity-overview-point js-highlight-top-ellipse " rx="3" ry="3" stroke-width="2" fill="white" cx="142.5" cy="123.72549019607843"></ellipse>
+    <ellipse class="activity-overview-point js-highlight-right-ellipse " rx="3" ry="3" stroke-width="2" fill="white" cx="165.16973039215685" cy="142.5"></ellipse>
+    <ellipse class="activity-overview-point js-highlight-bottom-ellipse " rx="3" ry="3" stroke-width="2" fill="white" cx="142.5" cy="158.67769607843138"></ellipse>
+    <ellipse class="activity-overview-point js-highlight-left-ellipse " rx="3" ry="3" stroke-width="2" fill="white" cx="78.28125" cy="142.5"></ellipse>
+    <text text-anchor="middle" class="activity-overview-percentage js-highlight-percent-top" dx="142.5" dy="52.28125">16%</text>
+    <text text-anchor="middle" class="text-small activity-overview-label js-highlight-label-top" dx="142.5" dy="66.28125">Code review</text>
+    <text text-anchor="start" class="activity-overview-percentage js-highlight-percent-right" dy="140.25" dx="225.828125">19%</text>
+    <text text-anchor="start" class="text-small activity-overview-label js-highlight-label-right" dy="154.25" dx="218.71875">Issues</text>
+    <text text-anchor="middle" class="activity-overview-percentage js-highlight-percent-bottom" dx="142.5" dy="224.21875">14%</text>
+    <text text-anchor="middle" class="text-small activity-overview-label js-highlight-label-bottom" dx="142.5" dy="238.21875">Pull requests</text>
+    <text text-anchor="end" class="activity-overview-percentage js-highlight-percent-left" dy="140.25" dx="50.21875">51%</text>
+    <text text-anchor="end" class="text-small activity-overview-label js-highlight-label-left" dy="154.25" dx="64.28125">Commits</text>
+  </g>
+</svg>
