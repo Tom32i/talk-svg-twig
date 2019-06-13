@@ -67,6 +67,12 @@ svg.time g:hover .label-box  {
   opacity: 1;
 }
 
+
+svg.time .fragment .label,
+svg.time .fragment .label-box {
+  opacity: 1;
+}
+
 @media print {
   @page {
     size: auto;   /* auto is the initial value */

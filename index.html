@@ -63,7 +63,16 @@
                         -->
                     </section>
                     <section>
-                        <p>une image</p>
+                        <p>Une image</p>
+                    </section>
+                    <section>
+                        <p>Vectorielle</p>
+                    </section>
+                    <section>
+                        <p>XML</p>
+                        <pre><code class="hljs xml" data-trim>
+&lt;svg xmlns="http://www.w3.org/2000/svg">
+&lt;/svg></code></pre>
                     </section>
                     <section>
                         <h2>2D</h2>
@@ -111,8 +120,7 @@
                         <h2>Formes = Noeuds XML</h2>
                     </section>
                     <section>
-                        <pre><code class="hljs xml" data-trim>
-&lt;circle cx="55" cy="40" r="32"></circle></code></pre>
+                        <pre><code class="hljs xml" data-trim>&lt;circle cx="55" cy="40" r="32"></circle></code></pre>
                     </section>
                     <section>
 <pre><code class="hljs xml" data-trim>&lt;rect
@@ -134,47 +142,68 @@
 /></code></pre>
                         </code></pre>
                     </section>
+                    <section>
+                        <h3>Parfait pour les graphs !</h3>
+                        <!-- Histogrames, courbes, camembert, ect. -->
+                    </section>
                 </section>
                 <section>
                     <section>
                         <h2>SVG + Twig = <3</h2>
                     </section>
                     <section>
+                        <h3>SVG dans vos template :</h3>
+                        <p><code>dashboard.html.twig</code></p>
+                        <pre><code class="hljs twig" data-trim>
+{% block body %}
+&lt;div>
+  &lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    {% for value in data %}
+      &lt;rect x="{{ loop.index }}" y="0" width="1" height="{{ value }}" />
+    {% endfor %}
+  &lt;/svg>
+&lt;/div>
+{% endblock %}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <div>
                         <p><code>histogram.svg.twig</code></p>
                         <pre><code class="hljs twig" data-trim>
-{% macro bar(x, width, height, class = 'bar') %}
-  &lt;rect
-    class="{{ class }}"
-    x="{{ x - width / 2 }}"
-    y="{{ - height }}"
-    width="{{ width }}"
-    height="{{ height }}"
-  />
+&lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    {# ... #}
+&lt;/svg>
+                        </code></pre>
+                        </div>
+                        <div class="fragment">
+                            <p><code>dashboard.html.twig</code></p>
+                            <pre><code class="hljs twig" data-trim>
+{% include 'graph/histogram.svg.twig' with { data: user.activity } %}
+                            </code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <p>Macros</p>
+                        <pre><code class="hljs twig" data-trim>
+&lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    {% for value in data %}
+      {{ _self.bar(loop.index, value) }}
+    {% endfor %}
+&lt;/svg>
+
+{% macro bar(x, height, width = 1, class = 'bar') %}
+  &lt;rect class="{{ class }}"
+    x="{{ x - width / 2 }}" y="0"
+    width="{{ width }}" height="{{ height }}" />
 {% endmacro %}
  </code></pre>
                     </section>
                     <section>
-                        <ul>
-                            <li class="fragment">Utilisez vos variables</li>
-                            <li class="fragment">Traduction</li>
-                            <li class="fragment">Boucles, conditions, ...</li>
-                            <li class="fragment">Un peu de math</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h2>Une réponse HTTP complète !</h2>
-                        <ul>
-                            <li class="fragment">Au format SVG:</li>
-                            <!-- exemple de code balise img -->
-                            <li class="fragment">Au format HTML (SVG inline: /mon-url/graph</li>
-                            <!-- exemple de code -->
-                        </ul>
-                    </section>
-                    <section>
-                        <p>Au format SVG :</p>
+                        <h3>Réponse au format SVG :</h3>
                         <pre><code class="hljs php" data-trim>
 /**
- * @Route("/graph/pie.svg", defaults={"_format":"svg"})
+ * @Route("/graph/pie.svg", name="pie", defaults={"_format":"svg"})
  */
 public function pie()
 {
@@ -186,6 +215,9 @@ public function pie()
                         </code></pre>
                     </section>
                     <section>
+                        <pre><code class="hljs html" data-trim>&lt;img src="{{ path('pie') }}" /></code></pre>
+                    </section>
+                    <section>
                         <pre><code class="hljs yaml" data-trim>
 framework:
     request:
@@ -193,11 +225,19 @@ framework:
             svg: 'image/svg+xml'
                         </code></pre>
                     </section>
-                    <section>
-                        <p>Au format SVG: <code>/mon-url/graph.svg</code></p>
-                        <pre><code class="hljs html" data-trim>&lt;img src="/mon-url/graph.svg" /></code></pre>
-                    </section>
                 </section>
+                    <section>
+                        <h3>Toute la puissance de Twig</h3>
+                        <ul>
+                            <li class="fragment">Variables</li>
+                            <li class="fragment">Boucles, conditions, ...</li>
+                            <li class="fragment">Traduction</li>
+                            <li class="fragment">Un peu de math</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Une réponse HTTP complète !</h2>
+                    </section>
                 <section>
                     <section>
                         <svg class="pie" width="546" height="330" viewBox="-182 -110 364 220" xmlns="http://www.w3.org/2000/svg">
@@ -219,110 +259,152 @@ framework:
                         </svg>
                         <!--img src="img/pie.svg" class="plain" style="width: 66%;"-->
                     </section>
+                </section>
+                <section>
                     <section>
-                        <pre><code class="htljs css" data-trim>
-svg.pie .portion {
-    fill: #FFCDB2;
-    stroke-width: 0;
+                        <h2>Stylable en CSS</h2>
+                    </section>
+                    <section>
+                        <pre><code class="hljs twig" data-trim>
+&lt;svg xmlns="http://www.w3.org/2000/svg">
+    &lt;style type="text/css">
+        svg.pie .portion {
+            fill: #FFCDB2;
+            stroke-width: 0;
+        }
+    &lt;/style>
+    {# ... #}
+&lt;/svg>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code>app.css</code></p>
+                        <pre><code class="hljs css" data-trim>
+svg.histogram text {
+  font-family: 'Ubuntu', monospace;
 }
                         </code></pre>
                     </section>
-                </section>
-                <section>
-                    <h2>Stylable en CSS</h2>
-                    <ul>
-                        <li class="fragment"><code>:hover</code></li>
-                    </ul>
-                </section>
-                <section>
-                    <svg class="time" width="1000" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg">
-                      <line class="axe" x1="-0%" x2="100%" y1="0" y2="0"></line>
-                      <g>
-                        <rect class="bar" x="18.75" y="-114.41441441441" width="45.833333333333" height="114.41441441441"></rect>
-                        <path class="label-box" d="M41.666666666667 -119.41441441441 L36.666666666667 -124.41441441441 L8.1666666666667 -124.41441441441 L8.1666666666667 -153.41441441441 L75.166666666667 -153.41441441441 L75.166666666667 -124.41441441441 L46.666666666667 -124.41441441441 Z"></path>
-                        <text class="label" x="41.666666666667" y="-134.41441441441" text-anchor="middle">127 kg</text>
-                      </g>
-                      <text class="legend" x="41.666666666667" y="20" text-anchor="middle">JANV.</text>
-                      <g>
-                        <rect class="bar" x="102.08333333333" y="-102.7027027027" width="45.833333333333" height="102.7027027027"></rect>
-                        <path class="label-box" d="M125 -107.7027027027 L120 -112.7027027027 L91.5 -112.7027027027 L91.5 -141.7027027027 L158.5 -141.7027027027 L158.5 -112.7027027027 L130 -112.7027027027 Z"></path>
-                        <text class="label" x="125" y="-122.7027027027" text-anchor="middle">114 kg</text>
-                      </g>
-                      <text class="legend" x="125" y="20" text-anchor="middle">FÉVR.</text>
-                      <g>
-                        <rect class="bar" x="185.41666666667" y="-88.288288288288" width="45.833333333333" height="88.288288288288"></rect>
-                        <path class="label-box" d="M208.33333333333 -93.288288288288 L203.33333333333 -98.288288288288 L179.08333333333 -98.288288288288 L179.08333333333 -127.28828828829 L237.58333333333 -127.28828828829 L237.58333333333 -98.288288288288 L213.33333333333 -98.288288288288 Z"></path>
-                        <text class="label" x="208.33333333333" y="-108.28828828829" text-anchor="middle">98 kg</text>
-                      </g>
-                      <text class="legend" x="208.33333333333" y="20" text-anchor="middle">MARS</text>
-                      <g>
-                        <rect class="bar" x="268.75" y="-100.9009009009" width="45.833333333333" height="100.9009009009"></rect>
-                        <path class="label-box" d="M291.66666666667 -105.9009009009 L286.66666666667 -110.9009009009 L258.16666666667 -110.9009009009 L258.16666666667 -139.9009009009 L325.16666666667 -139.9009009009 L325.16666666667 -110.9009009009 L296.66666666667 -110.9009009009 Z"></path>
-                        <text class="label" x="291.66666666667" y="-120.9009009009" text-anchor="middle">112 kg</text>
-                      </g>
-                      <text class="legend" x="291.66666666667" y="20" text-anchor="middle">AVR.</text>
-                      <g>
-                        <rect class="bar" x="352.08333333333" y="-121.62162162162" width="45.833333333333" height="121.62162162162"></rect>
-                        <path class="label-box" d="M375 -126.62162162162 L370 -131.62162162162 L341.5 -131.62162162162 L341.5 -160.62162162162 L408.5 -160.62162162162 L408.5 -131.62162162162 L380 -131.62162162162 Z"></path>
-                        <text class="label" x="375" y="-141.62162162162" text-anchor="middle">135 kg</text>
-                      </g>
-                      <text class="legend" x="375" y="20" text-anchor="middle">MAI</text>
-                      <g>
-                        <rect class="bar" x="435.41666666667" y="-140.54054054054" width="45.833333333333" height="140.54054054054"></rect>
-                        <path class="label-box" d="M458.33333333333 -145.54054054054 L453.33333333333 -150.54054054054 L424.83333333333 -150.54054054054 L424.83333333333 -179.54054054054 L491.83333333333 -179.54054054054 L491.83333333333 -150.54054054054 L463.33333333333 -150.54054054054 Z"></path>
-                        <text class="label" x="458.33333333333" y="-160.54054054054" text-anchor="middle">156 kg</text>
-                      </g>
-                      <text class="legend" x="458.33333333333" y="20" text-anchor="middle">JUIN</text>
-                      <g>
-                        <rect class="bar" x="518.75" y="-200" width="45.833333333333" height="200"></rect>
-                        <path class="label-box" d="M541.66666666667 -205 L536.66666666667 -210 L508.16666666667 -210 L508.16666666667 -239 L575.16666666667 -239 L575.16666666667 -210 L546.66666666667 -210 Z"></path>
-                        <text class="label" x="541.66666666667" y="-220" text-anchor="middle">222 kg</text>
-                      </g>
-                      <text class="legend" x="541.66666666667" y="20" text-anchor="middle">JUIL.</text>
-                      <g>
-                        <rect class="bar" x="602.08333333333" y="-178.37837837838" width="45.833333333333" height="178.37837837838"></rect>
-                        <path class="label-box" d="M625 -183.37837837838 L620 -188.37837837838 L591.5 -188.37837837838 L591.5 -217.37837837838 L658.5 -217.37837837838 L658.5 -188.37837837838 L630 -188.37837837838 Z"></path>
-                        <text class="label" x="625" y="-198.37837837838" text-anchor="middle">198 kg</text>
-                      </g>
-                      <text class="legend" x="625" y="20" text-anchor="middle">AOÛT</text>
-                      <g>
-                        <rect class="bar" x="685.41666666667" y="-104.5045045045" width="45.833333333333" height="104.5045045045"></rect>
-                        <path class="label-box" d="M708.33333333333 -109.5045045045 L703.33333333333 -114.5045045045 L674.83333333333 -114.5045045045 L674.83333333333 -143.5045045045 L741.83333333333 -143.5045045045 L741.83333333333 -114.5045045045 L713.33333333333 -114.5045045045 Z"></path>
-                        <text class="label" x="708.33333333333" y="-124.5045045045" text-anchor="middle">116 kg</text>
-                      </g>
-                      <text class="legend" x="708.33333333333" y="20" text-anchor="middle">SEPT.</text>
-                      <g>
-                        <rect class="bar" x="768.75" y="-86.486486486486" width="45.833333333333" height="86.486486486486"></rect>
-                        <path class="label-box" d="M791.66666666667 -91.486486486486 L786.66666666667 -96.486486486486 L762.41666666667 -96.486486486486 L762.41666666667 -125.48648648649 L820.91666666667 -125.48648648649 L820.91666666667 -96.486486486486 L796.66666666667 -96.486486486486 Z"></path>
-                        <text class="label" x="791.66666666667" y="-106.48648648649" text-anchor="middle">96 kg</text>
-                      </g>
-                      <text class="legend" x="791.66666666667" y="20" text-anchor="middle">OCT.</text>
-                      <g>
-                        <rect class="bar" x="852.08333333333" y="-82.882882882883" width="45.833333333333" height="82.882882882883"></rect>
-                        <path class="label-box" d="M875 -87.882882882883 L870 -92.882882882883 L845.75 -92.882882882883 L845.75 -121.88288288288 L904.25 -121.88288288288 L904.25 -92.882882882883 L880 -92.882882882883 Z"></path>
-                        <text class="label" x="875" y="-102.88288288288" text-anchor="middle">92 kg</text>
-                      </g>
-                      <text class="legend" x="875" y="20" text-anchor="middle">NOV.</text>
-                      <g>
-                        <rect class="bar" x="935.41666666667" y="-97.297297297297" width="45.833333333333" height="97.297297297297"></rect>
-                        <path class="label-box" d="M958.33333333333 -102.2972972973 L953.33333333333 -107.2972972973 L924.83333333333 -107.2972972973 L924.83333333333 -136.2972972973 L991.83333333333 -136.2972972973 L991.83333333333 -107.2972972973 L963.33333333333 -107.2972972973 Z"></path>
-                        <text class="label" x="958.33333333333" y="-117.2972972973" text-anchor="middle">108 kg</text>
-                      </g>
-                      <text class="legend" x="958.33333333333" y="20" text-anchor="middle">DÉC.</text>
-                    </svg>
+                    <section>
+                        <p><code>:hover</code></p>
+                    </section>
+                    <section>
+                        <svg class="time" width="1000" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg">
+                          <line class="axe" x1="-0%" x2="100%" y1="0" y2="0"></line>
+                          <g>
+                            <rect class="bar" x="18.75" y="-114.41441441441" width="45.833333333333" height="114.41441441441"></rect>
+                            <path class="label-box" d="M41.666666666667 -119.41441441441 L36.666666666667 -124.41441441441 L8.1666666666667 -124.41441441441 L8.1666666666667 -153.41441441441 L75.166666666667 -153.41441441441 L75.166666666667 -124.41441441441 L46.666666666667 -124.41441441441 Z"></path>
+                            <text class="label" x="41.666666666667" y="-134.41441441441" text-anchor="middle">127 kg</text>
+                          </g>
+                          <text class="legend" x="41.666666666667" y="20" text-anchor="middle">JANV.</text>
+                          <g>
+                            <rect class="bar" x="102.08333333333" y="-102.7027027027" width="45.833333333333" height="102.7027027027"></rect>
+                            <path class="label-box" d="M125 -107.7027027027 L120 -112.7027027027 L91.5 -112.7027027027 L91.5 -141.7027027027 L158.5 -141.7027027027 L158.5 -112.7027027027 L130 -112.7027027027 Z"></path>
+                            <text class="label" x="125" y="-122.7027027027" text-anchor="middle">114 kg</text>
+                          </g>
+                          <text class="legend" x="125" y="20" text-anchor="middle">FÉVR.</text>
+                          <g>
+                            <rect class="bar" x="185.41666666667" y="-88.288288288288" width="45.833333333333" height="88.288288288288"></rect>
+                            <path class="label-box" d="M208.33333333333 -93.288288288288 L203.33333333333 -98.288288288288 L179.08333333333 -98.288288288288 L179.08333333333 -127.28828828829 L237.58333333333 -127.28828828829 L237.58333333333 -98.288288288288 L213.33333333333 -98.288288288288 Z"></path>
+                            <text class="label" x="208.33333333333" y="-108.28828828829" text-anchor="middle">98 kg</text>
+                          </g>
+                          <text class="legend" x="208.33333333333" y="20" text-anchor="middle">MARS</text>
+                          <g>
+                            <rect class="bar" x="268.75" y="-100.9009009009" width="45.833333333333" height="100.9009009009"></rect>
+                            <path class="label-box" d="M291.66666666667 -105.9009009009 L286.66666666667 -110.9009009009 L258.16666666667 -110.9009009009 L258.16666666667 -139.9009009009 L325.16666666667 -139.9009009009 L325.16666666667 -110.9009009009 L296.66666666667 -110.9009009009 Z"></path>
+                            <text class="label" x="291.66666666667" y="-120.9009009009" text-anchor="middle">112 kg</text>
+                          </g>
+                          <text class="legend" x="291.66666666667" y="20" text-anchor="middle">AVR.</text>
+                          <g>
+                            <rect class="bar" x="352.08333333333" y="-121.62162162162" width="45.833333333333" height="121.62162162162"></rect>
+                            <path class="label-box" d="M375 -126.62162162162 L370 -131.62162162162 L341.5 -131.62162162162 L341.5 -160.62162162162 L408.5 -160.62162162162 L408.5 -131.62162162162 L380 -131.62162162162 Z"></path>
+                            <text class="label" x="375" y="-141.62162162162" text-anchor="middle">135 kg</text>
+                          </g>
+                          <text class="legend" x="375" y="20" text-anchor="middle">MAI</text>
+                          <g>
+                            <rect class="bar" x="435.41666666667" y="-140.54054054054" width="45.833333333333" height="140.54054054054"></rect>
+                            <path class="label-box" d="M458.33333333333 -145.54054054054 L453.33333333333 -150.54054054054 L424.83333333333 -150.54054054054 L424.83333333333 -179.54054054054 L491.83333333333 -179.54054054054 L491.83333333333 -150.54054054054 L463.33333333333 -150.54054054054 Z"></path>
+                            <text class="label" x="458.33333333333" y="-160.54054054054" text-anchor="middle">156 kg</text>
+                          </g>
+                          <text class="legend" x="458.33333333333" y="20" text-anchor="middle">JUIN</text>
+                          <g>
+                            <rect class="bar" x="518.75" y="-200" width="45.833333333333" height="200"></rect>
+                            <path class="label-box" d="M541.66666666667 -205 L536.66666666667 -210 L508.16666666667 -210 L508.16666666667 -239 L575.16666666667 -239 L575.16666666667 -210 L546.66666666667 -210 Z"></path>
+                            <text class="label" x="541.66666666667" y="-220" text-anchor="middle">222 kg</text>
+                          </g>
+                          <text class="legend" x="541.66666666667" y="20" text-anchor="middle">JUIL.</text>
+                          <g>
+                            <rect class="bar" x="602.08333333333" y="-178.37837837838" width="45.833333333333" height="178.37837837838"></rect>
+                            <g class="fragment">
+                                <path class="label-box" d="M625 -183.37837837838 L620 -188.37837837838 L591.5 -188.37837837838 L591.5 -217.37837837838 L658.5 -217.37837837838 L658.5 -188.37837837838 L630 -188.37837837838 Z"></path>
+                                <text class="label" x="625" y="-198.37837837838" text-anchor="middle">198 kg</text>
+                            </g>
+                          </g>
+                          <text class="legend" x="625" y="20" text-anchor="middle">AOÛT</text>
+                          <g>
+                            <rect class="bar" x="685.41666666667" y="-104.5045045045" width="45.833333333333" height="104.5045045045"></rect>
+                            <path class="label-box" d="M708.33333333333 -109.5045045045 L703.33333333333 -114.5045045045 L674.83333333333 -114.5045045045 L674.83333333333 -143.5045045045 L741.83333333333 -143.5045045045 L741.83333333333 -114.5045045045 L713.33333333333 -114.5045045045 Z"></path>
+                            <text class="label" x="708.33333333333" y="-124.5045045045" text-anchor="middle">116 kg</text>
+                          </g>
+                          <text class="legend" x="708.33333333333" y="20" text-anchor="middle">SEPT.</text>
+                          <g>
+                            <rect class="bar" x="768.75" y="-86.486486486486" width="45.833333333333" height="86.486486486486"></rect>
+                            <path class="label-box" d="M791.66666666667 -91.486486486486 L786.66666666667 -96.486486486486 L762.41666666667 -96.486486486486 L762.41666666667 -125.48648648649 L820.91666666667 -125.48648648649 L820.91666666667 -96.486486486486 L796.66666666667 -96.486486486486 Z"></path>
+                            <text class="label" x="791.66666666667" y="-106.48648648649" text-anchor="middle">96 kg</text>
+                          </g>
+                          <text class="legend" x="791.66666666667" y="20" text-anchor="middle">OCT.</text>
+                          <g>
+                            <rect class="bar" x="852.08333333333" y="-82.882882882883" width="45.833333333333" height="82.882882882883"></rect>
+                            <path class="label-box" d="M875 -87.882882882883 L870 -92.882882882883 L845.75 -92.882882882883 L845.75 -121.88288288288 L904.25 -121.88288288288 L904.25 -92.882882882883 L880 -92.882882882883 Z"></path>
+                            <text class="label" x="875" y="-102.88288288288" text-anchor="middle">92 kg</text>
+                          </g>
+                          <text class="legend" x="875" y="20" text-anchor="middle">NOV.</text>
+                          <g>
+                            <rect class="bar" x="935.41666666667" y="-97.297297297297" width="45.833333333333" height="97.297297297297"></rect>
+                            <path class="label-box" d="M958.33333333333 -102.2972972973 L953.33333333333 -107.2972972973 L924.83333333333 -107.2972972973 L924.83333333333 -136.2972972973 L991.83333333333 -136.2972972973 L991.83333333333 -107.2972972973 L963.33333333333 -107.2972972973 Z"></path>
+                            <text class="label" x="958.33333333333" y="-117.2972972973" text-anchor="middle">108 kg</text>
+                          </g>
+                          <text class="legend" x="958.33333333333" y="20" text-anchor="middle">DÉC.</text>
+                        </svg>
+                    </section>
+                    <section>
+                        <svg class="pie" width="546" height="330" viewBox="-182 -110 364 220" xmlns="http://www.w3.org/2000/svg">
+                          <line class="label-line" x1="36.812455268468" y1="92.977648588825" x2="180" y2="92.977648588825"></line>
+                          <text class="label" x="102" y="104.97764858883">Abricot : 38%</text>
+                          <path class="portion" d="M0,0 L100,0 A100,100 1 0,1 -72.896862742141,68.454710592869 Z"></path>
+                          <line class="label-line" x1="-98.228725072869" y1="18.738131458573" x2="-180" y2="18.738131458573"></line>
+                          <text class="label" x="-180" y="30.738131458573">Melon : 18%</text>
+                          <path class="portion" d="M0,0 L-72.896862742141,68.454710592869 A100,100 1 0,1 -92.977648588825,-36.812455268468 Z"></path>
+                          <line class="label-line" x1="-83.580736136827" y1="-54.902281799813" x2="-180" y2="-54.902281799813"></line>
+                          <text class="label" x="-180" y="-42.902281799813">Pêche : 6.5%</text>
+                          <path class="portion" d="M0,0 L-92.977648588825,-36.812455268468 A100,100 1 0,1 -70.710678118655,-70.710678118655 Z"></path>
+                          <line class="label-line" x1="-33.873792024529" y1="-94.088076895423" x2="-180" y2="-94.088076895423"></line>
+                          <text class="label" x="-180" y="-82.088076895423">Figue : 14%</text>
+                          <path class="portion" d="M0,0 L-70.710678118655,-70.710678118655 A100,100 1 0,1 9.4108313318514,-99.556196460308 Z"></path>
+                          <line class="label-line" x1="73.963109497861" y1="-67.301251350977" x2="180" y2="-67.301251350977"></line>
+                          <text class="label" x="102" y="-55.301251350977">Prune : 23.5%</text>
+                          <path class="portion" d="M0,0 L9.4108313318514,-99.556196460308 A100,100 1 0,1 100,-1.1331077795296E-13 Z"></path>
+                        </svg>
+                        <!--img src="img/pie.svg" class="plain" style="width: 66%;"-->
+                    </section>
                 </section>
                 <section>
                     <section>
                         <h2>Avantages</h2>
                     </section>
                     <section>
+                        <h3>Léger</h3>
+                    </section>
+                    <section>
                         <h3>Mise en cache</h3>
                     </section>
                     <section>
-                        <h3>Selectionnable</h3>
+                        <h3>Interactif</h3>
+                        <!-- :hover, text selectionable -->
                     </section>
                     <section>
                         <h3>Haute définition</h3>
+                        <!-- print / écran haut DPI -->
                     </section>
                 </section>
                 <section>
@@ -338,6 +420,9 @@ svg.pie .portion {
                     <section>
                         <img src="img/symfony-profiler-4.3.png" class="plain">
                     </section>
+                    <!--section>
+                        Kindle ?
+                    </section-->
                 </section>
                 <section>
                     <div style="display: flex; flex-direction: column-reverse;">
