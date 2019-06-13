@@ -311,6 +311,10 @@ body {
   font-size: 3.4em;
 }
 
+.reveal section .talk-title small {
+  display: block;
+}
+
 .reveal section .center {
   display: flex;
   flex-direction: row;
