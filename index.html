@@ -72,9 +72,6 @@
 &lt;/svg></code></pre>
                     </section>
                     <section>
-                        <p>Vectorielle</p>
-                    </section>
-                    <section>
                         <h2>2D</h2>
                         <svg class="fragment" width="420" height="420" viewBox="-20 -20 140 140" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0" y="0" width="100" height="100" class="axe-bold" />
@@ -108,6 +105,7 @@
                             <rect class="fragment" x="10" y="25" width="60" height="60" fill="orange" />
                             <circle class="fragment" cx="55" cy="40" r="32" fill="tomato" stroke-width="2" stroke="brown" />
                             <line class="fragment" x1="89" y1="15" x2="35" y2="76" stroke="brown" stroke-width="2" />
+                            <!--path class="fragment" d="M 5 40 C 20 5 32.5 5, 47.5 40 S 75 75, 90 40" stroke="orange" stroke-width="2" fill="none" /-->
                         </svg>
                         <!--
                             - Espace 2D
@@ -115,6 +113,9 @@
                             - Les noeuds XML décrivents des formes (rectangle, path, text, ...)
                             - Les formes ont de propriété de couleur et de bordure
                         -->
+                    </section>
+                    <section>
+                        <p>Vectorielle</p>
                     </section>
                     <section>
                         <h2>Formes = Noeuds XML</h2>
@@ -154,7 +155,7 @@
                     <section>
                         <h3>SVG dans vos template :</h3>
                         <p><code>dashboard.html.twig</code></p>
-                        <pre><code class="hljs twig" data-trim>
+                        <pre><code class="hljs twig small" data-trim>
 {% block body %}
 &lt;div>
   &lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +179,7 @@
                         <div class="fragment">
                             <p><code>dashboard.html.twig</code></p>
                             <pre><code class="hljs twig" data-trim>
-{% include 'graph/histogram.svg.twig' with { data: user.activity } %}
+{% include 'graph/histogram.svg.twig' with { data: user.usage } %}
                             </code></pre>
                         </div>
                     </section>
@@ -215,15 +216,15 @@ public function pie()
                         </code></pre>
                     </section>
                     <section>
-                        <pre><code class="hljs html" data-trim>&lt;img src="{{ path('pie') }}" /></code></pre>
-                    </section>
-                    <section>
                         <pre><code class="hljs yaml" data-trim>
 framework:
     request:
         formats:
             svg: 'image/svg+xml'
                         </code></pre>
+                    </section>
+                    <section>
+                        <pre><code class="hljs html" data-trim>&lt;img src="{{ path('pie') }}" /></code></pre>
                     </section>
                 </section>
                     <section>
@@ -238,31 +239,110 @@ framework:
                     <section>
                         <h2>Une réponse HTTP complète !</h2>
                     </section>
-                <section>
                     <section>
-                        <svg class="pie" width="546" height="330" viewBox="-182 -110 364 220" xmlns="http://www.w3.org/2000/svg">
-                          <line class="label-line" x1="36.812455268468" y1="92.977648588825" x2="180" y2="92.977648588825"></line>
-                          <text class="label" x="102" y="104.97764858883">Abricot : 38%</text>
-                          <path class="portion" d="M0,0 L100,0 A100,100 1 0,1 -72.896862742141,68.454710592869 Z"></path>
-                          <line class="label-line" x1="-98.228725072869" y1="18.738131458573" x2="-180" y2="18.738131458573"></line>
-                          <text class="label" x="-180" y="30.738131458573">Melon : 18%</text>
-                          <path class="portion" d="M0,0 L-72.896862742141,68.454710592869 A100,100 1 0,1 -92.977648588825,-36.812455268468 Z"></path>
-                          <line class="label-line" x1="-83.580736136827" y1="-54.902281799813" x2="-180" y2="-54.902281799813"></line>
-                          <text class="label" x="-180" y="-42.902281799813">Pêche : 6.5%</text>
-                          <path class="portion" d="M0,0 L-92.977648588825,-36.812455268468 A100,100 1 0,1 -70.710678118655,-70.710678118655 Z"></path>
-                          <line class="label-line" x1="-33.873792024529" y1="-94.088076895423" x2="-180" y2="-94.088076895423"></line>
-                          <text class="label" x="-180" y="-82.088076895423">Figue : 14%</text>
-                          <path class="portion" d="M0,0 L-70.710678118655,-70.710678118655 A100,100 1 0,1 9.4108313318514,-99.556196460308 Z"></path>
-                          <line class="label-line" x1="73.963109497861" y1="-67.301251350977" x2="180" y2="-67.301251350977"></line>
-                          <text class="label" x="102" y="-55.301251350977">Prune : 23.5%</text>
-                          <path class="portion" d="M0,0 L9.4108313318514,-99.556196460308 A100,100 1 0,1 100,-1.1331077795296E-13 Z"></path>
-                        </svg>
-                        <!--img src="img/pie.svg" class="plain" style="width: 66%;"-->
+                        <div class="row">
+                            <pre><code class="hljs php small" data-trim>
+    [
+      'fruit.apricot' => 0.38,
+      'fruit.melon' => 0.18,
+      'fruit.peach' => 0.065,
+      'fruit.fig' => 0.14,
+      'fruit.plum' => 0.235,
+    ]
+                            </code></pre>
+                            <img src="img/pie.svg" class="plain">
+                        </div>
                     </section>
                 </section>
                 <section>
                     <section>
                         <h2>Stylable en CSS</h2>
+                    </section>
+                    <section>
+                        <div>
+                            <svg class="curve" width="1000" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg"
+>
+                                <path class="curve" d="M 23.809523809524 0 L 23.809523809524 -114.41441441441 L 71.428571428571 -109.90990990991 L 119.04761904762 -111.71171171171 L 166.66666666667 -121.62162162162 L 214.28571428571 -136.03603603604 L 261.90476190476 -147.74774774775 L 309.52380952381 -133.33333333333 L 357.14285714286 -131.53153153153 L 404.7619047619 -118.91891891892 L 452.38095238095 -114.41441441441 L 500 -102.7027027027 L 547.61904761905 -88.288288288288 L 595.2380952381 -100.9009009009 L 642.85714285714 -121.62162162162 L 690.47619047619 -140.54054054054 L 738.09523809524 -200 L 785.71428571429 -178.37837837838 L 833.33333333333 -104.5045045045 L 880.95238095238 -86.486486486486 L 928.57142857143 -82.882882882883 L 976.19047619048 -97.297297297297 L 976.19047619048 0 Z" />
+                                <path class="curve" d="M 23.809523809524 0
+                                L 23.809523809524 -82.882882882883 L 71.428571428571 -88.288288288288 L 119.04761904762 -100.9009009009 L 166.66666666667 -115.31531531532 L 214.28571428571 -118.91891891892 L 261.90476190476 -124.32432432432 L 309.52380952381 -111.71171171171 L 357.14285714286 -101.8018018018 L 404.7619047619 -90.990990990991 L 452.38095238095 -96.396396396396 L 500 -74.774774774775 L 547.61904761905 -59.459459459459 L 595.2380952381 -64.864864864865 L 642.85714285714 -91.891891891892 L 690.47619047619 -111.71171171171 L 738.09523809524 -133.33333333333 L 785.71428571429 -122.52252252252 L 833.33333333333 -88.288288288288 L 880.95238095238 -65.765765765766 L 928.57142857143 -60.36036036036 L 976.19047619048 -50.45045045045 L 976.19047619048 0 Z" />
+                                <path class="curve" d="M 23.809523809524 0
+                                L 23.809523809524 -54.954954954955 L 71.428571428571 -71.171171171171 L 119.04761904762 -80.18018018018 L 166.66666666667 -83.783783783784 L 214.28571428571 -99.099099099099 L 261.90476190476 -97.297297297297 L 309.52380952381 -80.18018018018 L 357.14285714286 -86.486486486486 L 404.7619047619 -72.072072072072 L 452.38095238095 -86.486486486486 L 500 -60.36036036036 L 547.61904761905 -45.945945945946 L 595.2380952381 -49.54954954955 L 642.85714285714 -69.369369369369 L 690.47619047619 -95.495495495496 L 738.09523809524 -112.61261261261 L 785.71428571429 -106.30630630631 L 833.33333333333 -56.756756756757 L 880.95238095238 -38.738738738739 L 928.57142857143 -49.54954954955 L 976.19047619048 -20.720720720721 L 976.19047619048 0 Z" />
+                                <line class="axe" x1="-0%" x2="100%" y1="0" y2="0" />
+                                <text class="legend" x="23.809523809524" y="30" text-anchor="middle">1999</text>
+                                <line class="axe" x1="23.809523809524" x2="23.809523809524" y1="0" y2="5" />
+                                <line class="axe" x1="71.428571428571" x2="71.428571428571" y1="0" y2="5" />
+                                <text class="legend" x="119.04761904762" y="30" text-anchor="middle">2001</text>
+                                <line class="axe" x1="119.04761904762" x2="119.04761904762" y1="0" y2="5" />
+                                <line class="axe" x1="166.66666666667" x2="166.66666666667" y1="0" y2="5" />
+                                <text class="legend" x="214.28571428571" y="30" text-anchor="middle">2003</text>
+                                <line class="axe" x1="214.28571428571" x2="214.28571428571" y1="0" y2="5" />
+                                <line class="axe" x1="261.90476190476" x2="261.90476190476" y1="0" y2="5" />
+                                <text class="legend" x="309.52380952381" y="30" text-anchor="middle">2005</text>
+                                <line class="axe" x1="309.52380952381" x2="309.52380952381" y1="0" y2="5" />
+                                <line class="axe" x1="357.14285714286" x2="357.14285714286" y1="0" y2="5" />
+                                <text class="legend" x="404.7619047619" y="30" text-anchor="middle">2007</text>
+                                <line class="axe" x1="404.7619047619" x2="404.7619047619" y1="0" y2="5" />
+                                <line class="axe" x1="452.38095238095" x2="452.38095238095" y1="0" y2="5" />
+                                <text class="legend" x="500" y="30" text-anchor="middle">2009</text>
+                                <line class="axe" x1="500" x2="500" y1="0" y2="5" />
+                                <line class="axe" x1="547.61904761905" x2="547.61904761905" y1="0" y2="5" />
+                                <text class="legend" x="595.2380952381" y="30" text-anchor="middle">2011</text>
+                                <line class="axe" x1="595.2380952381" x2="595.2380952381" y1="0" y2="5" />
+                                <line class="axe" x1="642.85714285714" x2="642.85714285714" y1="0" y2="5" />
+                                <text class="legend" x="690.47619047619" y="30" text-anchor="middle">2013</text>
+                                <line class="axe" x1="690.47619047619" x2="690.47619047619" y1="0" y2="5" />
+                                <line class="axe" x1="738.09523809524" x2="738.09523809524" y1="0" y2="5" />
+                                <text class="legend" x="785.71428571429" y="30" text-anchor="middle">2015</text>
+                                <line class="axe" x1="785.71428571429" x2="785.71428571429" y1="0" y2="5" />
+                                <line class="axe" x1="833.33333333333" x2="833.33333333333" y1="0" y2="5" />
+                                <text class="legend" x="880.95238095238" y="30" text-anchor="middle">2017</text>
+                                <line class="axe" x1="880.95238095238" x2="880.95238095238" y1="0" y2="5" />
+                                <line class="axe" x1="928.57142857143" x2="928.57142857143" y1="0" y2="5" />
+                                <text class="legend" x="976.19047619048" y="30" text-anchor="middle">2019</text>
+                                <line class="axe" x1="976.19047619048" x2="976.19047619048" y1="0" y2="5" />
+                            </svg>
+                            <svg class="curve" width="1000" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg"
+>
+                                <path class="curve" d="M 23.809523809524 0 L 23.809523809524 -114.41441441441 L 71.428571428571 -109.90990990991 L 119.04761904762 -111.71171171171 L 166.66666666667 -121.62162162162 L 214.28571428571 -136.03603603604 L 261.90476190476 -147.74774774775 L 309.52380952381 -133.33333333333 L 357.14285714286 -131.53153153153 L 404.7619047619 -118.91891891892 L 452.38095238095 -114.41441441441 L 500 -102.7027027027 L 547.61904761905 -88.288288288288 L 595.2380952381 -100.9009009009 L 642.85714285714 -121.62162162162 L 690.47619047619 -140.54054054054 L 738.09523809524 -200 L 785.71428571429 -178.37837837838 L 833.33333333333 -104.5045045045 L 880.95238095238 -86.486486486486 L 928.57142857143 -82.882882882883 L 976.19047619048 -97.297297297297 L 976.19047619048 0 Z" />
+                                <path class="curve" d="M 23.809523809524 0
+                                L 23.809523809524 -82.882882882883 L 71.428571428571 -88.288288288288 L 119.04761904762 -100.9009009009 L 166.66666666667 -115.31531531532 L 214.28571428571 -118.91891891892 L 261.90476190476 -124.32432432432 L 309.52380952381 -111.71171171171 L 357.14285714286 -101.8018018018 L 404.7619047619 -90.990990990991 L 452.38095238095 -96.396396396396 L 500 -74.774774774775 L 547.61904761905 -59.459459459459 L 595.2380952381 -64.864864864865 L 642.85714285714 -91.891891891892 L 690.47619047619 -111.71171171171 L 738.09523809524 -133.33333333333 L 785.71428571429 -122.52252252252 L 833.33333333333 -88.288288288288 L 880.95238095238 -65.765765765766 L 928.57142857143 -60.36036036036 L 976.19047619048 -50.45045045045 L 976.19047619048 0 Z" />
+                                <path class="curve" d="M 23.809523809524 0
+                                L 23.809523809524 -54.954954954955 L 71.428571428571 -71.171171171171 L 119.04761904762 -80.18018018018 L 166.66666666667 -83.783783783784 L 214.28571428571 -99.099099099099 L 261.90476190476 -97.297297297297 L 309.52380952381 -80.18018018018 L 357.14285714286 -86.486486486486 L 404.7619047619 -72.072072072072 L 452.38095238095 -86.486486486486 L 500 -60.36036036036 L 547.61904761905 -45.945945945946 L 595.2380952381 -49.54954954955 L 642.85714285714 -69.369369369369 L 690.47619047619 -95.495495495496 L 738.09523809524 -112.61261261261 L 785.71428571429 -106.30630630631 L 833.33333333333 -56.756756756757 L 880.95238095238 -38.738738738739 L 928.57142857143 -49.54954954955 L 976.19047619048 -20.720720720721 L 976.19047619048 0 Z" />
+                                <line class="axe" x1="-0%" x2="100%" y1="0" y2="0" />
+                                <text class="legend" x="23.809523809524" y="30" text-anchor="middle">1999</text>
+                                <line class="axe" x1="23.809523809524" x2="23.809523809524" y1="0" y2="5" />
+                                <line class="axe" x1="71.428571428571" x2="71.428571428571" y1="0" y2="5" />
+                                <text class="legend" x="119.04761904762" y="30" text-anchor="middle">2001</text>
+                                <line class="axe" x1="119.04761904762" x2="119.04761904762" y1="0" y2="5" />
+                                <line class="axe" x1="166.66666666667" x2="166.66666666667" y1="0" y2="5" />
+                                <text class="legend" x="214.28571428571" y="30" text-anchor="middle">2003</text>
+                                <line class="axe" x1="214.28571428571" x2="214.28571428571" y1="0" y2="5" />
+                                <line class="axe" x1="261.90476190476" x2="261.90476190476" y1="0" y2="5" />
+                                <text class="legend" x="309.52380952381" y="30" text-anchor="middle">2005</text>
+                                <line class="axe" x1="309.52380952381" x2="309.52380952381" y1="0" y2="5" />
+                                <line class="axe" x1="357.14285714286" x2="357.14285714286" y1="0" y2="5" />
+                                <text class="legend" x="404.7619047619" y="30" text-anchor="middle">2007</text>
+                                <line class="axe" x1="404.7619047619" x2="404.7619047619" y1="0" y2="5" />
+                                <line class="axe" x1="452.38095238095" x2="452.38095238095" y1="0" y2="5" />
+                                <text class="legend" x="500" y="30" text-anchor="middle">2009</text>
+                                <line class="axe" x1="500" x2="500" y1="0" y2="5" />
+                                <line class="axe" x1="547.61904761905" x2="547.61904761905" y1="0" y2="5" />
+                                <text class="legend" x="595.2380952381" y="30" text-anchor="middle">2011</text>
+                                <line class="axe" x1="595.2380952381" x2="595.2380952381" y1="0" y2="5" />
+                                <line class="axe" x1="642.85714285714" x2="642.85714285714" y1="0" y2="5" />
+                                <text class="legend" x="690.47619047619" y="30" text-anchor="middle">2013</text>
+                                <line class="axe" x1="690.47619047619" x2="690.47619047619" y1="0" y2="5" />
+                                <line class="axe" x1="738.09523809524" x2="738.09523809524" y1="0" y2="5" />
+                                <text class="legend" x="785.71428571429" y="30" text-anchor="middle">2015</text>
+                                <line class="axe" x1="785.71428571429" x2="785.71428571429" y1="0" y2="5" />
+                                <line class="axe" x1="833.33333333333" x2="833.33333333333" y1="0" y2="5" />
+                                <text class="legend" x="880.95238095238" y="30" text-anchor="middle">2017</text>
+                                <line class="axe" x1="880.95238095238" x2="880.95238095238" y1="0" y2="5" />
+                                <line class="axe" x1="928.57142857143" x2="928.57142857143" y1="0" y2="5" />
+                                <text class="legend" x="976.19047619048" y="30" text-anchor="middle">2019</text>
+                                <line class="axe" x1="976.19047619048" x2="976.19047619048" y1="0" y2="5" />
+                            </svg>
+                        </div>
                     </section>
                     <section>
                         <pre><code class="hljs twig" data-trim>
@@ -286,12 +366,9 @@ svg.histogram text {
                         </code></pre>
                     </section>
                     <section>
-                        <img src="img/curve.svg" class="plain">
-                    </section>
-                    <section>
                         <p><code>:hover</code></p>
                     </section>
-                    <section>
+                    <section data-state="end-pie">
                         <svg class="time" width="1000" height="280" viewBox="-0 -240 1000 280" xmlns="http://www.w3.org/2000/svg">
                           <line class="axe" x1="-0%" x2="100%" y1="0" y2="0"></line>
                           <g>
@@ -370,8 +447,8 @@ svg.histogram text {
                           <text class="legend" x="958.33333333333" y="20" text-anchor="middle">DÉC.</text>
                         </svg>
                     </section>
-                    <section>
-                        <svg class="pie" width="546" height="330" viewBox="-182 -110 364 220" xmlns="http://www.w3.org/2000/svg">
+                    <section data-state="pie">
+                        <svg id="pie-scale" class="pie scaleUp" width="546" height="330" viewBox="-182 -110 364 220" xmlns="http://www.w3.org/2000/svg">
                           <line class="label-line" x1="36.812455268468" y1="92.977648588825" x2="180" y2="92.977648588825"></line>
                           <text class="label" x="102" y="104.97764858883">Abricot : 38%</text>
                           <path class="portion" d="M0,0 L100,0 A100,100 1 0,1 -72.896862742141,68.454710592869 Z"></path>
@@ -391,7 +468,7 @@ svg.histogram text {
                         <!--img src="img/pie.svg" class="plain" style="width: 66%;"-->
                     </section>
                 </section>
-                <section>
+                <section data-state="end-pie">
                     <section>
                         <h2>Avantages</h2>
                     </section>
@@ -455,6 +532,7 @@ svg.histogram text {
         <script src="./node_modules/reveal.js/js/reveal.js"></script>
 
         <script>
+            const pieScale = document.getElementById('pie-scale');
             Reveal.initialize({
                 history: true,
                 overview: false,
@@ -480,6 +558,8 @@ svg.histogram text {
                     }
                 ]
             });
+            Reveal.addEventListener('pie', () => pieScale.classList.add('go'), false);
+            Reveal.addEventListener('end-pie', () => pieScale.classList.remove('go'), false);
         </script>
     </body>
 </html>

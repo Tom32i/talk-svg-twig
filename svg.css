@@ -18,11 +18,11 @@ svg.pie .portion:hover {
   transform: scale(1.05);
 }
 
-svg.pie .portion:nth-of-type(5n+1) { fill: #FFCDB2; }
-svg.pie .portion:nth-of-type(5n+2) { fill: #FFB4A2; }
-svg.pie .portion:nth-of-type(5n+3) { fill: #E5989B; }
-svg.pie .portion:nth-of-type(5n+4) { fill: #B5838D; }
-svg.pie .portion:nth-of-type(5n+0) { fill: #6D6875; }
+svg.pie .portion:nth-of-type(1) { fill: #FFCDB2; }
+svg.pie .portion:nth-of-type(2) { fill: #FFB4A2; }
+svg.pie .portion:nth-of-type(3) { fill: #E5989B; }
+svg.pie .portion:nth-of-type(4) { fill: #B5838D; }
+svg.pie .portion:nth-of-type(5) { fill: #6D6875; }
 
 svg.pie .label {
   font-size: 12px;
@@ -30,6 +30,20 @@ svg.pie .label {
 }
 svg.pie .label-line {
   stroke: lightgrey;
+}
+
+svg.pie.scaleUp.go .portion:nth-of-type(5n+3) {
+  transform: scale(1.05);
+}
+svg.pie.scaleUp .portion {
+  transition: transform 200ms cubic-bezier(0,.53,.35,1.49) 800ms;
+}
+
+svg.pie.scaleUp.go .label:nth-of-type(5n+3) {
+  font-size: 13px;
+}
+svg.pie.scaleUp .label {
+  transition: all 200ms cubic-bezier(0,.53,.35,1.49) 800ms;
 }
 
 /* TIME*/
@@ -73,6 +87,31 @@ svg.time .fragment .label-box {
   opacity: 1;
 }
 
+/* CURVES */
+
+svg.curve .curve {
+  stroke: none;
+  opacity: 1;
+}
+
+svg.curve .curve:nth-of-type(1) { fill: #FFCDB2; }
+svg.curve .curve:nth-of-type(2) { fill: #FFB4A2; }
+svg.curve .curve:nth-of-type(3) { fill: #E5989B; }
+
+svg.curve:nth-of-type(2) .curve:nth-of-type(1) { fill: #c8dad3; }
+svg.curve:nth-of-type(2) .curve:nth-of-type(2) { fill: #93b5b3; }
+svg.curve:nth-of-type(2) .curve:nth-of-type(3) { fill: #8a9aa9; }
+
+svg.curve .axe {
+  stroke: #6D6875;
+  stroke-width: 0.6;
+}
+
+svg.curve .legend {
+  font-size: 16px;
+  fill: #6D6875;
+}
+
 @media print {
   @page {
     size: auto;   /* auto is the initial value */
@@ -88,5 +127,14 @@ svg.time .fragment .label-box {
   svg.time .label,
   svg.time .label-box {
     opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }
