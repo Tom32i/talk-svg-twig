@@ -1,0 +1,6 @@
+<svg width="420" height="420" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect class="fragment" x="10" y="25" width="60" height="60" fill="orange" />
+    <circle class="fragment" cx="55" cy="40" r="32" fill="tomato" stroke-width="2" stroke="brown" />
+    <line class="fragment" x1="89" y1="15" x2="35" y2="76" stroke="brown" stroke-width="2" />
+    <path class="fragment" d="m34.1875,26.25c0.75,-5 15.5,-14.25 21.875,5.375c6.375,19.625 -7.75,15.125 -13.625,12.625c-5.875,-2.5 -6.375,-8.875 -3.875,-11.125c2.5,-2.25 5,-2.25 6.5,0.125" stroke="orange" stroke-width="2" fill="none" />
+</svg>
