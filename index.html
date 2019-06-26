@@ -39,14 +39,25 @@
                 margin-bottom: -4em;
                 margin-top: 4em;
             }
+            .reveal section .i-love-svg {
+                font-size: 6em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .reveal section .i-love-svg img {
+                width: 1em;
+                height: 1em;
+                margin: 0 0.2em;
+            }
         </style>
     </head>
     <body>
         <div class="reveal">
             <div class="slides">
                 <section>
-                    <h1 class="talk-titlea">
-                        Des graphiques dans Symfony
+                    <h1 class="talk-title">
+                        Des graphiques<br>dans Symfony
                         <small>avec Twig et SVG</small>
                     </h1>
                 </section>
@@ -177,6 +188,11 @@
 /></code></pre>
                         </code></pre>
                     </section>
+                    <!--section>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">
+                            SVG sur MDN Web docs
+                        </a>
+                    </section-->
                     <section>
                         <h3>Parfait pour les graphs !</h3>
                         <!-- Histogrames, courbes, camembert, ect. -->
@@ -192,9 +208,9 @@
                         <pre><code class="hljs twig small" data-trim>
 {% block body %}
 &lt;div>
-  &lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+  &lt;svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
     {% for value in data %}
-      &lt;rect x="{{ loop.index }}" y="0" width="1" height="{{ value }}" />
+      &lt;rect x="{{ loop.index }}" y="0" width="5" height="{{ value }}" />
     {% endfor %}
   &lt;/svg>
 &lt;/div>
@@ -204,20 +220,28 @@
                     <section>
                         <div>
                         <p><code>pie.svg.twig</code></p>
-                        <pre><code class="hljs twig" data-trim>
-&lt;svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <pre><code class="hljs twig small" data-trim>
+&lt;svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     {# ... #}
 &lt;/svg>
                         </code></pre>
                         </div>
                         <div class="fragment">
                             <p><code>pie.html.twig</code></p>
-                            <pre><code class="hljs twig" data-trim>
+                            <pre><code class="hljs twig small" data-trim>
 {% include 'graph/pie.svg.twig' with { data: user.activity } %}
                             </code></pre>
                         </div>
                     </section>
-
+                    <section>
+                        <h3>Toute la puissance de Twig</h3>
+                        <ul>
+                            <li class="fragment">Variables</li>
+                            <li class="fragment">Boucles, conditions, macros, ...</li>
+                            <li class="fragment">Traduction</li>
+                            <!--li class="fragment">Un peu de math</li-->
+                        </ul>
+                    </section>
                     <!--section>
                         <p>Macros</p>
                         <pre><code class="hljs twig" data-trim>
@@ -238,7 +262,7 @@
                         <h3>Réponse au format SVG :</h3>
                         <pre><code class="hljs php" data-trim>
 /**
- * @Route("/graph/pie.svg", name="pie", defaults={"_format":"svg"})
+ * @Route("/pie.svg", name="pie", defaults={"_format":"svg"})
  */
 public function pie()
 {
@@ -250,6 +274,7 @@ public function pie()
                         </code></pre>
                     </section>
                     <section>
+                        <code>config/packages/framework.yaml</code>
                         <pre><code class="hljs yaml" data-trim>
 framework:
     request:
@@ -259,21 +284,11 @@ framework:
                     </section>
                     <section>
                         <pre><code class="hljs html" data-trim>&lt;img src="{{ path('pie') }}" /></code></pre>
-                    </section>
-                </section>
-                    <section>
-                        <h3>Toute la puissance de Twig</h3>
-                        <ul>
-                            <li class="fragment">Variables</li>
-                            <li class="fragment">Boucles, conditions, macros, ...</li>
-                            <li class="fragment">Traduction</li>
-                            <li class="fragment">Un peu de math</li>
-                        </ul>
+                        <pre class="fragment"><code class="hljs css" data-trim>background-image: url(/pie.svg);</code></pre>
                     </section>
                     <section>
                         <h2>Une réponse HTTP complète !</h2>
-                    </section>
-                    <section>
+                        <br>
                         <div class="row">
                             <pre><code class="hljs php small" data-trim>
     [
@@ -503,10 +518,20 @@ svg.histogram text {
                         </svg>
                         <!--img src="img/pie.svg" class="plain" style="width: 66%;"-->
                     </section>
+                    <section data-state="end-pie">
+                        <h3>Feuille de style <code>print</code></h3>
+                        <pre><code class="hljs css" data-trim>
+@media print {
+    svg .label {
+        opacity: 1;
+    }
+}
+                    </code></pre>
+                    </section>
                 </section>
-                <section data-state="end-pie">
+                <section>
                     <section>
-                        <h2>Avantages</h2>
+                        <h2>Avantages et contraintes</h2>
                     </section>
                     <section>
                         <h3>Léger</h3>
@@ -519,8 +544,16 @@ svg.histogram text {
                         <!-- :hover, text selectionable -->
                     </section>
                     <section>
+                        <h3>Sur mesure</h3>
+                        <!-- Pas de librairie, coller au maquette -->
+                    </section>
+                    <section>
                         <h3>Haute définition</h3>
                         <!-- print / écran haut DPI -->
+                    </section>
+                    <section>
+                        <h3>Low tech</h3>
+                        <!-- Bien supporté, peu de maintenance, mais un peu de math ... -->
                     </section>
                     <section data-background-color="white" data-background-image="img/liseuse.png" data-background-size="contain">
                     </section>
@@ -543,6 +576,9 @@ svg.histogram text {
                     <!--section>
                         Kindle ?
                     </section-->
+                </section>
+                <section>
+                    <h2 class="i-love-svg">I <img class="plain inline" src="img/heart.svg"> SVG</h2>
                 </section>
                 <section>
                     <div style="display: flex; flex-direction: column-reverse;">
