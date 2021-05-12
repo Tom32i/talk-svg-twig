@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/Tom32i/talk-svg-twig#readme",
   "dependencies": {
-    "reveal.js": "^3.8.0"
+    "reveal.js": "^3.9.2"
   }
 }
